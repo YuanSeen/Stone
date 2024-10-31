@@ -1,7 +1,9 @@
 package io.github.yuanseen.stone;
 
 import com.mojang.logging.LogUtils;
+import io.github.yuanseen.stone.block.ModBlocks;
 import io.github.yuanseen.stone.entity.StoneEntityTypes;
+import io.github.yuanseen.stone.item.ModCreativeTab;
 import io.github.yuanseen.stone.item.ModItems;
 //import io.github.yuanseen.stone.world.structure.ModStructurePieceTypes;
 //import io.github.yuanseen.stone.world.structure.ModStructureSets;
@@ -39,6 +41,8 @@ public class Stone
         modEventBus.addListener(this::commonSetup);
         StoneEntityTypes.register(modEventBus);
         ModItems.register(modEventBus);
+        ModCreativeTab.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         ModStructureType.register(modEventBus);

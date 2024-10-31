@@ -1,14 +1,12 @@
 package io.github.yuanseen.stone.item;
 
 import io.github.yuanseen.stone.Stone;
+import io.github.yuanseen.stone.block.ModBlocks;
 import io.github.yuanseen.stone.item.custom.CapybaraPokeBall;
 import io.github.yuanseen.stone.world.food.ModFoods;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.food.Foods;
-import net.minecraft.world.item.EggItem;
-import net.minecraft.world.item.EnchantedGoldenAppleItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -24,6 +22,7 @@ public class ModItems {
     public static final Supplier<Item> ENCHANTED_GOLDEN_TANGERINE = ITEMS.register(
             "enchanted_golden_tangerine",() -> new EnchantedGoldenAppleItem(new Item.Properties().rarity(Rarity.EPIC).food(ModFoods.ENCHANTED_GOLDEN_TANGERINE))
     );
+//    public static final Supplier<Item> MAGIC_CIRCLE_ITEM = ITEMS.register("magic_circle_item",()->new BlockItem(ModBlocks.MAGIC_CIRCLE.get(), new Item.Properties()));
 
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);

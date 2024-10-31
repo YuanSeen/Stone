@@ -41,7 +41,7 @@ public class MyStructurePieces {
     static final Map<ResourceLocation, BlockPos> OFFSETS = ImmutableMap.of(
             STRUCTURE_LOCATION_MY_STRUCTURE, BlockPos.ZERO,
             ON_STRUCTURE_LOCATION_MY_STRUCTURE, BlockPos.ZERO,
-            BEON_STRUCTURE_LOCATION_MY_STRUCTURE, new BlockPos(1, 0, 0)
+            BEON_STRUCTURE_LOCATION_MY_STRUCTURE, BlockPos.ZERO
     );
 
     public static void addPieces(
