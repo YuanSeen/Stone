@@ -5,6 +5,9 @@
     },
     "magic_item_id=1": {
       "model": "stone:block/magic_circle_1"
+    },
+    "magic_item_id=64": {
+      "model": "stone:block/magic_circle_64"
     }
   }
 }

@@ -1,5 +1,6 @@
 package io.github.yuanseen.stone.block.magic_block;
 
+import io.github.yuanseen.stone.item.ModItems;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 
@@ -8,6 +9,9 @@ public class MagicItemIDToBe {
         int id=0;
         if (item.equals(Items.GOLD_BLOCK)) {// 代码块
             id = 1;
+        }else
+        if (item.equals(ModItems.MAGIC_ITEM_FATHER.get())) {
+            id = 64;
         }
         return id;
     }
@@ -19,6 +23,10 @@ public class MagicItemIDToBe {
                 break;
             case 1:
                 item = Items.GOLD_BLOCK;
+                break;
+            case 64:
+                item = ModItems.MAGIC_ITEM_FATHER.get();
+                break;
         }
         return item;
     }

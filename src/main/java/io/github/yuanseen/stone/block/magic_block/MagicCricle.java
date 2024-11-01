@@ -3,6 +3,8 @@ package io.github.yuanseen.stone.block.magic_block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -37,17 +39,20 @@ public class MagicCricle extends Block {
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         ItemStack itemStack = pPlayer.getItemInHand(InteractionHand.MAIN_HAND);
         Item item = itemStack.getItem();
-        int id = 0 ;
-        if (!pPlayer.getAbilities().mayBuild) {
-            return InteractionResult.PASS;
-        } else {
-//            pLevel.setBlock(pPos, pState.cycle(DELAY), 3);
+        int id = 0;
             id = MagicItemIDToBe.getMagicItemID(item);
-            pLevel.setBlock(pPos,pState.cycle(MAGICKITEMID),id);
-
+            pLevel.setBlock(pPos,pState.setValue(MAGICKITEMID,id),2);
+        if (id!=0){
+            ItemEntity itemEntity = new ItemEntity(EntityType.ITEM,pLevel);
+            itemEntity.setItem(item.getDefaultInstance());
+            itemEntity.setNeverPickUp();
+            itemEntity.setPos(pPos.getX()+0.5,pPos.getY()+1,pPos.getZ()+0.5);
+            pLevel.addFreshEntity(itemEntity);
+            itemStack.shrink(1);
+            }
 
             return InteractionResult.sidedSuccess(pLevel.isClientSide);
-        }
+
     }
 
     public MagicCricle(Properties p_49795_) {

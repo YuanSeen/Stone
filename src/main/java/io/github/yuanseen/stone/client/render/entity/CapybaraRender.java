@@ -1,18 +1,12 @@
 package io.github.yuanseen.stone.client.render.entity;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import io.github.yuanseen.stone.Stone;
 import io.github.yuanseen.stone.client.model.entity.CapybaraModel;
-import io.github.yuanseen.stone.client.model.entity.StoneMobModel;
-import io.github.yuanseen.stone.client.render.layers.CapybaraCarryingItemLayer;
+import io.github.yuanseen.stone.client.render.entity.layers.CapybaraCarryingItemLayer;
 import io.github.yuanseen.stone.entity.CapybaraEntity;
-import net.minecraft.client.model.CatModel;
 import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.layers.CatCollarLayer;
-import net.minecraft.client.renderer.entity.layers.DolphinCarryingItemLayer;
 import net.minecraft.resources.ResourceLocation;
 
 
