@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "magic_item_id=0": {
+      "model": "stone:block/magic_circle_0"
+    },
+    "magic_item_id=1": {
+      "model": "stone:block/magic_circle_1"
+    }
+  }
+}
