@@ -1,6 +1,7 @@
 package io.github.yuanseen.stone;
 
 import com.mojang.logging.LogUtils;
+import io.github.yuanseen.stone.block.ModBlockEntities;
 import io.github.yuanseen.stone.block.ModBlocks;
 import io.github.yuanseen.stone.entity.StoneEntityTypes;
 import io.github.yuanseen.stone.item.ModCreativeTab;
@@ -47,6 +48,7 @@ public class Stone
         modEventBus.addListener(this::commonSetup);
         ModStructureType.register(modEventBus);
         ModStructurePieceTypes.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(this);
 
