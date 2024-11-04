@@ -33,6 +33,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
+import static net.minecraft.world.entity.Entity.RemovalReason.KILLED;
 import static net.minecraft.world.entity.Entity.RemovalReason.UNLOADED_TO_CHUNK;
 
 public class MagicCricle extends BaseEntityBlock {
@@ -50,17 +51,6 @@ public class MagicCricle extends BaseEntityBlock {
 
     private static BlockPos pos = new BlockPos(0, 0, 0);;
 
-    @Nullable
-    public UUID getItemEntityUUID() {
-        return itemEntityUUID;
-    }
-
-    @Nullable
-    private UUID itemEntityUUID = null;
-
-    public void setItemEntityUUID(ItemEntity itemEntity) {
-        this.itemEntityUUID = itemEntity.getUUID();
-    }
 
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
@@ -83,33 +73,31 @@ public class MagicCricle extends BaseEntityBlock {
         ItemStack itemStack = pPlayer.getItemInHand(InteractionHand.MAIN_HAND);
         Item item = itemStack.getItem();
         setPos(pPos);
+        MagicCricleBlockEntity blockEntity = (MagicCricleBlockEntity) pLevel.getBlockEntity(pPos);
         int id = 0;
             id = MagicItemIDToBe.getMagicItemID(item);
             pLevel.setBlock(pPos,pState.setValue(MAGICKITEMID,id),2);
-        if (id!=0){
-            ItemEntity itemEntity = new ItemEntity(EntityType.ITEM,pLevel);
-            setItemEntityUUID(itemEntity);
-            itemEntity.noPhysics = false;
-            itemEntity.setItem(item.getDefaultInstance());
-            itemEntity.setNeverPickUp();
-            itemEntity.setPos(pPos.getX()+0.5,pPos.getY()+1,pPos.getZ()+0.5);
-            pLevel.addFreshEntity(itemEntity);
-            itemStack.shrink(1);
-            }else{
-            killItemEntity(getItemEntityUUID(),pLevel);
-        }
+            //全场唯一 setblock
+        if (!pLevel.isClientSide()) {
+            if (id != 0) {
+                blockEntity.killItemEntity(pLevel,pPos);
+                ItemEntity itemEntity = new ItemEntity(EntityType.ITEM, pLevel);
+                itemEntity.noPhysics = false;
+                itemEntity.setItem(item.getDefaultInstance());
+                itemEntity.setNeverPickUp();
+                itemEntity.setPos(pPos.getX() + 0.5, pPos.getY() + 1, pPos.getZ() + 0.5);
+                pLevel.addFreshEntity(itemEntity);
+                itemStack.shrink(1);
 
-            return InteractionResult.sidedSuccess(pLevel.isClientSide);
+                blockEntity.setUuid(itemEntity.getUUID());
 
-    }
-
-    public void killItemEntity(UUID beKillTtemEntityUUID,Level pLevel){
-        if (beKillTtemEntityUUID != null) {
-            Level level = pLevel;
-            if (level instanceof ServerLevel serverlevel) {
-                serverlevel.getEntity(beKillTtemEntityUUID).remove(UNLOADED_TO_CHUNK);
+                System.out.println("放入的是" + blockEntity.getUuid() + ")");
+            } else {
+                blockEntity.killItemEntity(pLevel,pPos);
             }
         }
+            return InteractionResult.sidedSuccess(pLevel.isClientSide);
+
     }
 
     @Nullable
@@ -124,13 +112,13 @@ public class MagicCricle extends BaseEntityBlock {
 
     @Override
     public void destroy(LevelAccessor pLevel, BlockPos pPos, BlockState pState) {
-        killItemEntity(this.itemEntityUUID, (Level) pLevel);
 
     }
 
     @Override
     public void wasExploded(Level pLevel, BlockPos pPos, Explosion pExplosion) {
-        killItemEntity(this.itemEntityUUID,pLevel);
+
+
     }
 
 

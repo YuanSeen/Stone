@@ -19,13 +19,38 @@ import java.awt.*;
 import java.util.UUID;
 
 import static io.github.yuanseen.stone.block.magic_block.MagicCricle.MAGICKITEMID;
+import static net.minecraft.world.entity.Entity.RemovalReason.KILLED;
 
 public class MagicCricleBlockEntity extends BlockEntity {
     private static final int MAX_TIME = 5 * 20;
     private int timer = 0;
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
+
+    private UUID uuid = null;
+
+    public void killItemEntity(Level pLevel,BlockPos pPos){
+        if (getUuid() != null  ) {
+            Level level = pLevel;
+            if (level instanceof ServerLevel serverlevel) {
+                if(serverlevel.getEntity(getUuid()) != null) {
+                    serverlevel.getEntity(getUuid()).remove(KILLED);
+                    System.out.println("摧毁的是"+getUuid()+")");
+                }
+            }
+        }
+    }
+
     @Override
     public void load(CompoundTag pTag) {
         timer = pTag.getInt("counter");
+        uuid = pTag.getUUID("uuid");
         super.load(pTag);
     }
 
@@ -33,21 +58,19 @@ public class MagicCricleBlockEntity extends BlockEntity {
     protected void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
         pTag.putInt("counter",timer);
+        pTag.putUUID("uuid",uuid);
     }
 
     public static void serverTick(Level pLevel, BlockPos pPos, BlockState pState, MagicCricleBlockEntity pBlockEntity) {
-        MagicCricle block = (MagicCricle) pState.getBlock();
         if(pLevel!=null && !pLevel.isClientSide ){
-            if (block.getItemEntityUUID()!=null && ((ServerLevel)pLevel).getEntity(block.getItemEntityUUID())==null){
-//                block.setItemEntityUUID(null);
+            if (pBlockEntity.getUuid()!=null && ((ServerLevel)pLevel).getEntity(pBlockEntity.getUuid())==null){
                 pLevel.setBlock(pPos,pState.setValue(MAGICKITEMID,0),2);
             }
 //            //计时自毁
             if(pBlockEntity.timer == MagicCricleBlockEntity.MAX_TIME){
                 //移除展示物品
-                if (block.getItemEntityUUID()!=null && ((ServerLevel)pLevel).getEntity(block.getItemEntityUUID())!=null){
-                block.killItemEntity(block.getItemEntityUUID(),pLevel);
-
+                if (pBlockEntity.getUuid()!=null && ((ServerLevel)pLevel).getEntity(pBlockEntity.getUuid())!=null){
+                pBlockEntity.killItemEntity(pLevel,pPos);
                      }
                 pLevel.destroyBlock(pPos,false);//移除方块
                 pLevel.removeBlockEntity(pPos);//移除方块实体
