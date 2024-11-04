@@ -1,13 +1,22 @@
 {
   "variants": {
     "magic_item_id=0": {
-      "model": "stone:block/magic_circle_0"
+      "model": "stone:block/magic_circle/magic_circle_0"
     },
     "magic_item_id=1": {
-      "model": "stone:block/magic_circle_1"
+      "model": "stone:block/magic_circle/magic_circle_1"
     },
-    "magic_item_id=64": {
-      "model": "stone:block/magic_circle_64"
+    "magic_item_id=2": {
+      "model": "stone:block/magic_circle/magic_circle_2"
+    },
+    "magic_item_id=3": {
+      "model": "stone:block/magic_circle/magic_circle_3"
+    },
+    "magic_item_id=4": {
+      "model": "stone:block/magic_circle/magic_circle_4"
+    },
+    "magic_item_id=5": {
+      "model": "stone:block/magic_circle/magic_circle_5"
     }
   }
 }

@@ -22,7 +22,7 @@ import static io.github.yuanseen.stone.block.magic_block.MagicCricle.MAGICKITEMI
 import static net.minecraft.world.entity.Entity.RemovalReason.KILLED;
 
 public class MagicCricleBlockEntity extends BlockEntity {
-    private static final int MAX_TIME = 5 * 20;
+    private static final int MAX_TIME = 600 * 20;
     private int timer = 0;
 
     public UUID getUuid() {
