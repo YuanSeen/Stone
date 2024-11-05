@@ -28,6 +28,7 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 
+import static net.minecraft.world.entity.Entity.RemovalReason.UNLOADED_TO_CHUNK;
 import static net.minecraft.world.level.block.Block.UPDATE_ALL;
 
 public class ReturnLockTargetEntity extends AbstractArrow {
@@ -58,6 +59,7 @@ public class ReturnLockTargetEntity extends AbstractArrow {
     public void tick() {
         if (this.inGroundTime > 4) {
             this.dealtDamage = true;
+            this.remove(UNLOADED_TO_CHUNK);
         }
 
         Entity entity = this.getOwner();
@@ -101,7 +103,7 @@ public class ReturnLockTargetEntity extends AbstractArrow {
                         BlockPos blockposWillBeAttach = entity.blockPosition();
                         BlockPos blockPosPlayer = entity1.blockPosition();
                         nullMagicCricleSpawn3(blockposWillBeAttach,blockPosPlayer);
-
+                        this.remove(UNLOADED_TO_CHUNK);
                     }
                 }
             }
