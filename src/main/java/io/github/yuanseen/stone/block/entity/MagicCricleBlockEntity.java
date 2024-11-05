@@ -26,7 +26,7 @@ public class MagicCricleBlockEntity extends BlockEntity {
 
     private int[] blockPosArray = null ;
 
-    private BlockPos middleMagicCricleBlockPos = new BlockPos(blockPosArray[0],blockPosArray[1],blockPosArray[2]);
+    private BlockPos middleMagicCricleBlockPos ;
 
     public void killItemEntity(Level pLevel,BlockPos pPos){
         if (getItemEntityUUID() != null  ) {
@@ -46,6 +46,7 @@ public class MagicCricleBlockEntity extends BlockEntity {
         itemEntityUUID = pTag.getUUID("item_entity_uuid");
         attachEntityUUID = pTag.getUUID("attach_entity_uuid");
         blockPosArray = pTag.getIntArray("blockPosArray");
+        this.middleMagicCricleBlockPos = new BlockPos(blockPosArray[0],blockPosArray[1],blockPosArray[2]);
         cricleHowBig = pTag.getInt("cricle_how_big");
 
         super.load(pTag);
@@ -105,8 +106,10 @@ public class MagicCricleBlockEntity extends BlockEntity {
         return blockPosArray;
     }
 
-    public void setBlockPosArray(int[] blockPosArray) {
+    public void setBlockPosArray(BlockPos blockPosArrayOri) {
+        int[] blockPosArray ={blockPosArrayOri.getX(),blockPosArrayOri.getY(),blockPosArrayOri.getZ()};
         this.blockPosArray = blockPosArray;
+        this.middleMagicCricleBlockPos = new BlockPos(blockPosArray[0],blockPosArray[1],blockPosArray[2]);
     }
 
     public int getCricleHowBig() {

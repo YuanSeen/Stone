@@ -1,6 +1,7 @@
 package io.github.yuanseen.stone.entity.magic;
 
 import io.github.yuanseen.stone.block.ModBlocks;
+import io.github.yuanseen.stone.block.entity.MagicCricleBlockEntity;
 import io.github.yuanseen.stone.entity.ModEntityTypes;
 import io.github.yuanseen.stone.item.ModItems;
 import net.minecraft.core.BlockPos;
@@ -23,6 +24,8 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 
@@ -35,6 +38,9 @@ public class ReturnLockTargetEntity extends AbstractArrow {
     private static final EntityDataAccessor<Boolean> ID_FOIL = SynchedEntityData.defineId(ReturnLockTargetEntity.class, EntityDataSerializers.BOOLEAN);
     private static final ItemStack DEFAULT_ARROW_STACK = new ItemStack(Items.TRIDENT);
     private boolean dealtDamage;
+
+    private int cricleHowBig = 0;
+
     public int clientSideReturnTridentTickCount;
 
     public ReturnLockTargetEntity(EntityType<? extends ReturnLockTargetEntity> p_37561_, Level p_37562_) {
@@ -102,7 +108,7 @@ public class ReturnLockTargetEntity extends AbstractArrow {
                         // 获取被击中实体的方块位置
                         BlockPos blockposWillBeAttach = entity.blockPosition();
                         BlockPos blockPosPlayer = entity1.blockPosition();
-                        nullMagicCricleSpawn3(blockposWillBeAttach,blockPosPlayer);
+                        nullMagicCricleSpawn3(blockposWillBeAttach,blockPosPlayer,livingentity1);
                         this.remove(UNLOADED_TO_CHUNK);
                     }
                 }
@@ -120,7 +126,8 @@ public class ReturnLockTargetEntity extends AbstractArrow {
     }
 
     //生成空白法阵组 3 阶
-    public void nullMagicCricleSpawn3(BlockPos blockposWillBeAttach,BlockPos blockPosPlayer){
+
+    public void nullMagicCricleSpawn3(BlockPos blockposWillBeAttach,BlockPos blockPosPlayer,Entity attachEntity){
         int x,z;
         if (blockposWillBeAttach.getX()-blockPosPlayer.getX()>0){
             x = blockPosPlayer.getX()+1;
@@ -133,15 +140,18 @@ public class ReturnLockTargetEntity extends AbstractArrow {
             z = blockPosPlayer.getZ()-1;
         }
 
-
+        BlockPos middleBlockpos = new BlockPos(x,blockPosPlayer.getY(),z);
         for (int i = -1 ; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
                 BlockPos setblockPos = new BlockPos(x+i,blockPosPlayer.getY(),z+j);
                 this.level().setBlock(setblockPos, ModBlocks.MAGIC_CIRCLE.get().defaultBlockState(), UPDATE_ALL);
+                MagicCricleBlockEntity blockEntity = (MagicCricleBlockEntity) this.level().getBlockEntity(setblockPos);
+                blockEntity.setAttachEntityUUID(attachEntity.getUUID());
+                blockEntity.setBlockPosArray(middleBlockpos);
+                blockEntity.setCricleHowBig(getCricleHowBig());
             }
         }
     }
-
 
 
 
@@ -189,8 +199,16 @@ public class ReturnLockTargetEntity extends AbstractArrow {
     public void tickDespawn() {
     }
 
+
 //    @Override
 //    public boolean shouldRender(double pX, double pY, double pZ) {
 //        return false;
 //    }
+public int getCricleHowBig() {
+    return cricleHowBig;
+}
+
+    public void setCricleHowBig(int cricleHowBig) {
+        this.cricleHowBig = cricleHowBig;
+    }
 }
