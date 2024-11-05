@@ -3,7 +3,7 @@ package io.github.yuanseen.stone;
 import com.mojang.logging.LogUtils;
 import io.github.yuanseen.stone.block.ModBlockEntities;
 import io.github.yuanseen.stone.block.ModBlocks;
-import io.github.yuanseen.stone.entity.StoneEntityTypes;
+import io.github.yuanseen.stone.entity.ModEntityTypes;
 import io.github.yuanseen.stone.item.ModCreativeTab;
 import io.github.yuanseen.stone.item.ModItems;
 //import io.github.yuanseen.stone.world.structure.ModStructurePieceTypes;
@@ -11,9 +11,6 @@ import io.github.yuanseen.stone.item.ModItems;
 //import io.github.yuanseen.stone.world.structure.ModStructureType;
 import io.github.yuanseen.stone.world.structure.ModStructurePieceTypes;
 import io.github.yuanseen.stone.world.structure.ModStructureType;
-import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -40,7 +37,7 @@ public class Stone
     {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
-        StoneEntityTypes.register(modEventBus);
+        ModEntityTypes.register(modEventBus);
         ModItems.register(modEventBus);
         ModCreativeTab.register(modEventBus);
         ModBlocks.register(modEventBus);

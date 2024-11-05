@@ -7,14 +7,11 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
-import net.minecraft.world.entity.projectile.ThrownEgg;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -63,11 +60,11 @@ public class ThrownCapybaraPokeBall extends ThrowableItemProjectile {
     }
 
     public ThrownCapybaraPokeBall(Level pLevel, LivingEntity pShooter) {
-        super(StoneEntityTypes.CAPYBARAP_POKEBALL_ENTITY.get(), pShooter, pLevel);
+        super(ModEntityTypes.CAPYBARAP_POKEBALL_ENTITY.get(), pShooter, pLevel);
     }
 
     public ThrownCapybaraPokeBall(Level pLevel, double pX, double pY, double pZ) {
-        super(StoneEntityTypes.CAPYBARAP_POKEBALL_ENTITY.get(), pX, pY, pZ, pLevel);
+        super(ModEntityTypes.CAPYBARAP_POKEBALL_ENTITY.get(), pX, pY, pZ, pLevel);
     }
 
 
@@ -118,7 +115,7 @@ public class ThrownCapybaraPokeBall extends ThrowableItemProjectile {
 
 //                for(int j = 0; j < i; ++j) {
 //                    Chicken chicken = EntityType.CHICKEN.create(this.level());
-                    CapybaraEntity capybara = StoneEntityTypes.CAPYBARA_ENTITY.get().create(this.level());
+                    CapybaraEntity capybara = ModEntityTypes.CAPYBARA_ENTITY.get().create(this.level());
                     if (capybara != null) {
 //                        chicken.setAge(-24000);
                         ItemStack item = this.getHandItem();

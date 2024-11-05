@@ -20,9 +20,10 @@ import java.util.UUID;
 
 import static io.github.yuanseen.stone.block.magic_block.MagicCricle.MAGICKITEMID;
 import static net.minecraft.world.entity.Entity.RemovalReason.KILLED;
+import static net.minecraft.world.level.block.Block.UPDATE_ALL;
 
 public class MagicCricleBlockEntity extends BlockEntity {
-    private static final int MAX_TIME = 600 * 20;
+    private static final int MAX_TIME = 10 * 20;
     private int timer = 0;
 
     public UUID getUuid() {
@@ -33,7 +34,7 @@ public class MagicCricleBlockEntity extends BlockEntity {
         this.uuid = uuid;
     }
 
-    private UUID uuid = null;
+    private UUID uuid = UUID.randomUUID();
 
     public void killItemEntity(Level pLevel,BlockPos pPos){
         if (getUuid() != null  ) {
@@ -41,7 +42,7 @@ public class MagicCricleBlockEntity extends BlockEntity {
             if (level instanceof ServerLevel serverlevel) {
                 if(serverlevel.getEntity(getUuid()) != null) {
                     serverlevel.getEntity(getUuid()).remove(KILLED);
-                    System.out.println("摧毁的是"+getUuid()+")");
+//                    System.out.println("摧毁的是"+getUuid()+")");
                 }
             }
         }
@@ -64,7 +65,8 @@ public class MagicCricleBlockEntity extends BlockEntity {
     public static void serverTick(Level pLevel, BlockPos pPos, BlockState pState, MagicCricleBlockEntity pBlockEntity) {
         if(pLevel!=null && !pLevel.isClientSide ){
             if (pBlockEntity.getUuid()!=null && ((ServerLevel)pLevel).getEntity(pBlockEntity.getUuid())==null){
-                pLevel.setBlock(pPos,pState.setValue(MAGICKITEMID,0),2);
+                pLevel.setBlock(pPos,pState.setValue(MAGICKITEMID,0),UPDATE_ALL
+                );
             }
 //            //计时自毁
             if(pBlockEntity.timer == MagicCricleBlockEntity.MAX_TIME){

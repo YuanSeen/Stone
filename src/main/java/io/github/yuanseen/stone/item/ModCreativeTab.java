@@ -24,6 +24,8 @@ public class ModCreativeTab {
                 pOutput.accept(ModItems.CAPYBARA_POKEBALL.get());
                 pOutput.accept(ModItems.TANGERINE.get());
                 pOutput.accept(ModItems.MAGIC_ITEM_FATHER.get());
+                pOutput.accept(ModItems.MAGIC_STICK1.get());
+//                pOutput.accept(ModItems.MAGIC_STICK3.get());
                 pOutput.accept(ModBlocks.MAGIC_CIRCLE.get());
             })
             .build());

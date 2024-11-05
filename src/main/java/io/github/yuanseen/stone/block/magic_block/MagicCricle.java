@@ -76,7 +76,7 @@ public class MagicCricle extends BaseEntityBlock {
         MagicCricleBlockEntity blockEntity = (MagicCricleBlockEntity) pLevel.getBlockEntity(pPos);
         int id = 0;
             id = MagicItemIDToBe.getMagicItemID(item);
-            pLevel.setBlock(pPos,pState.setValue(MAGICKITEMID,id),2);
+            pLevel.setBlock(pPos,pState.setValue(MAGICKITEMID,id),UPDATE_ALL);
             //全场唯一 setblock
         if (!pLevel.isClientSide()) {
             if (id != 0) {
@@ -91,7 +91,7 @@ public class MagicCricle extends BaseEntityBlock {
 
                 blockEntity.setUuid(itemEntity.getUUID());
 
-                System.out.println("放入的是" + blockEntity.getUuid() + ")");
+//                System.out.println("放入的是" + blockEntity.getUuid() + ")");
             } else {
                 blockEntity.killItemEntity(pLevel,pPos);
             }
