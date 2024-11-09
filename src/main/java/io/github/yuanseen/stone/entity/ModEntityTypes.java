@@ -1,6 +1,7 @@
 package io.github.yuanseen.stone.entity;
 
 import io.github.yuanseen.stone.Stone;
+import io.github.yuanseen.stone.entity.magic.NullMagicCricleEntity;
 import io.github.yuanseen.stone.entity.magic.ReturnLockTargetEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.*;
@@ -18,6 +19,8 @@ public class ModEntityTypes {
     public static final Supplier<EntityType<ThrownCapybaraPokeBall>> CAPYBARAP_POKEBALL_ENTITY = ENTITY_TYPES.register("capybara_pokeball_entity",() -> EntityType.Builder.<ThrownCapybaraPokeBall>of(ThrownCapybaraPokeBall::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("capybara_pokeball_entity")
     );
     public static final Supplier<EntityType<ReturnLockTargetEntity>> RETURN_LOCK_TARGET_ENTITY = ENTITY_TYPES.register("return_lock_target_entity",() -> EntityType.Builder.<ReturnLockTargetEntity>of(ReturnLockTargetEntity::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build("return_lock_target_entity")
+    );
+    public static final Supplier<EntityType<NullMagicCricleEntity>> NULL_MAGIC_CRICLE_ENTITY = ENTITY_TYPES.register("null_magic_cricle_entity",() -> EntityType.Builder.of(NullMagicCricleEntity::new, MobCategory.MISC).sized(1.5F, 0.1F).clientTrackingRange(4).updateInterval(10).build("null_magic_cricle_entity")
     );
 
 

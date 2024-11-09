@@ -69,7 +69,7 @@ public class MagicCricle extends BaseEntityBlock {
         setPos(pPos);
         MagicCricleBlockEntity blockEntity = (MagicCricleBlockEntity) pLevel.getBlockEntity(pPos);
         int id = 0;
-            id = MagicItemIDToBe.getMagicItemID(item);
+            id = MagicDataHandle.getMagicItemID(item);
             pLevel.setBlock(pPos,pState.setValue(MAGICKITEMID,id),UPDATE_ALL);
             //全场唯一 setblock
         if (!pLevel.isClientSide()) {
