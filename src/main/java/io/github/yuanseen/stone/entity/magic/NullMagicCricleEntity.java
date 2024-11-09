@@ -17,7 +17,6 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class NullMagicCricleEntity extends Entity {
-    private boolean hasGlowingTag = true;
 
     public NullMagicCricleEntity(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -30,7 +29,6 @@ public class NullMagicCricleEntity extends Entity {
 
     @Override
     public <T> @Nullable T setData(Supplier<AttachmentType<T>> type, T data) {
-        this.setGlowingTag(true);
         return super.setData(type, data);
     }
 
@@ -45,11 +43,6 @@ public class NullMagicCricleEntity extends Entity {
 
     @Override
     protected void addAdditionalSaveData(CompoundTag pCompound) {
-
-    }
-
-    protected boolean getSharedFlag(int pFlag) {
-        return (this.entityData.get(DATA_SHARED_FLAGS_ID) & 1 << pFlag) != 0;
     }
 
     @Override
@@ -60,10 +53,5 @@ public class NullMagicCricleEntity extends Entity {
     @Override
     public CompoundTag serializeNBT() {
         return super.serializeNBT();
-    }
-
-    @Override
-    public void sendPairingData(ServerPlayer serverPlayer, Consumer<CustomPacketPayload> bundleBuilder) {
-        super.sendPairingData(serverPlayer, bundleBuilder);
     }
 }

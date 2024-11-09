@@ -2,9 +2,12 @@ package io.github.yuanseen.stone.client.render.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import io.github.yuanseen.stone.Stone;
 import io.github.yuanseen.stone.client.model.entity.magic.NullMagicCricleEntityModel;
+import io.github.yuanseen.stone.client.model.entity.magic.ReturnLockTargetEntityModel;
 import io.github.yuanseen.stone.entity.magic.NullMagicCricleEntity;
+import io.github.yuanseen.stone.entity.magic.ReturnLockTargetEntity;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -12,10 +15,10 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.GlowSquid;
+
 
 public class NullMagicCricleEntityModelRender extends EntityRenderer {
+
     private EntityModel<NullMagicCricleEntity> model;
 
     public NullMagicCricleEntityModelRender(EntityRendererProvider.Context pContext) {
@@ -39,12 +42,14 @@ public class NullMagicCricleEntityModelRender extends EntityRenderer {
         super.render(pEntity, pEntityYaw, pPartialTick, pPoseStack, pBuffer, pPackedLight);
         //你的渲染应该在posh和pop之间，避免污染其他的渲染。
         pPoseStack.pushPose();
-//        pPoseStack.translate(0,-1,0);
+        // 绕y轴旋转45°
+//        pPoseStack.mulPose(Axis.YN.rotationDegrees(45));
+        // 向下移动1格
+        pPoseStack.translate(0,-1,0);
         // 构建顶点
         VertexConsumer buffer = pBuffer.getBuffer(this.model.renderType(this.getTextureLocation(pEntity)));
         // 调用模型的render方法进行渲染，这里的OverlayTexture下有很多类型，自己选用。
-        this.model.renderToBuffer(pPoseStack,buffer,7, OverlayTexture.NO_OVERLAY,1f,1f,1f,1f);
+        this.model.renderToBuffer(pPoseStack,buffer,15, OverlayTexture.NO_OVERLAY,1f,1f,1f,1f);
         pPoseStack.popPose();
     }
 }
-

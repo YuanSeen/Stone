@@ -37,6 +37,16 @@ public class MagicDataHandle {
             Items.CLAY_BALL,//5
     };
 
+    public static int getMagicItemID(Item item){
+        int id = 0;
+        if (item.equals(Items.GOLD_BLOCK)){id=1;}else
+        if (item.equals(Items.BAMBOO)){id=2;}else
+        if (item.equals(ModItems.MAGIC_ITEM_FATHER.get())){id=3;}else
+        if (item.equals(Items.BLAZE_POWDER)){id=4;}else
+        if (item.equals(Items.CLAY_BALL)){id=5;};
+        return id;
+    }
+
     public static String getItemAttributeName(Item item){
         int id = getMagicItemID(item);
         return SI_MAIN_ATTRIBUTE[id];
@@ -50,9 +60,6 @@ public class MagicDataHandle {
     }
     public static int getItemAttributeNumber(int id){
         return SI_MAIN_ATTRIBUTE_NUMBER[id];
-    }
-    public static int getMagicItemID(Item item){
-        return Arrays.binarySearch(MAGICDATA,item);
     }
     public static Item getMagicItem(int id){
         return MagicDataHandle.MAGICDATA[id];

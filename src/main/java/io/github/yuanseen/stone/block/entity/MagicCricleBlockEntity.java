@@ -22,6 +22,8 @@ public class MagicCricleBlockEntity extends BlockEntity {
 
     private UUID attachEntityUUID = UUID.randomUUID();
 
+    private UUID nullMagicCricleUUID = UUID.randomUUID();
+
     private int cricleHowBig = 0;
 
     private int[] blockPosArray = null ;
@@ -45,6 +47,7 @@ public class MagicCricleBlockEntity extends BlockEntity {
         timer = pTag.getInt("counter");
         itemEntityUUID = pTag.getUUID("item_entity_uuid");
         attachEntityUUID = pTag.getUUID("attach_entity_uuid");
+        nullMagicCricleUUID = pTag.getUUID("null_magic_cricle_uuid");
         blockPosArray = pTag.getIntArray("blockPosArray");
         this.middleMagicCricleBlockPos = new BlockPos(blockPosArray[0],blockPosArray[1],blockPosArray[2]);
         cricleHowBig = pTag.getInt("cricle_how_big");
@@ -58,6 +61,7 @@ public class MagicCricleBlockEntity extends BlockEntity {
         pTag.putInt("counter",timer);
         pTag.putUUID("item_entity_uuid", itemEntityUUID);
         pTag.putUUID("attach_entity_uuid",attachEntityUUID);
+        pTag.putUUID("null_magic_cricle_uuid",nullMagicCricleUUID);
         pTag.putIntArray("blockPosArray",blockPosArray);
         pTag.putInt("cricle_how_big",cricleHowBig);
     }
@@ -118,5 +122,13 @@ public class MagicCricleBlockEntity extends BlockEntity {
 
     public void setCricleHowBig(int cricleHowBig) {
         this.cricleHowBig = cricleHowBig;
+    }
+
+    public UUID getNullMagicCricleUUID() {
+        return nullMagicCricleUUID;
+    }
+
+    public void setNullMagicCricleUUID(UUID nullMagicCricleUUID) {
+        this.nullMagicCricleUUID = nullMagicCricleUUID;
     }
 }

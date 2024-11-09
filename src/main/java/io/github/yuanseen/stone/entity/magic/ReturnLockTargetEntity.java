@@ -2,6 +2,7 @@ package io.github.yuanseen.stone.entity.magic;
 
 import io.github.yuanseen.stone.block.ModBlocks;
 import io.github.yuanseen.stone.block.entity.MagicCricleBlockEntity;
+import io.github.yuanseen.stone.entity.CapybaraEntity;
 import io.github.yuanseen.stone.entity.ModEntityTypes;
 import io.github.yuanseen.stone.item.ModItems;
 import net.minecraft.core.BlockPos;
@@ -30,6 +31,8 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
+
+import java.util.UUID;
 
 import static net.minecraft.world.entity.Entity.RemovalReason.UNLOADED_TO_CHUNK;
 import static net.minecraft.world.level.block.Block.UPDATE_ALL;
@@ -141,6 +144,11 @@ public class ReturnLockTargetEntity extends AbstractArrow {
         }
 
         BlockPos middleBlockpos = new BlockPos(x,blockPosPlayer.getY(),z);
+        BlockPos nullMagicCriclePos = new BlockPos(x,blockPosPlayer.getY(),z);
+//        NullMagicCricleEntity nullMagicCricle = ModEntityTypes.NULL_MAGIC_CRICLE_ENTITY.get().create(this.level());
+//        nullMagicCricle.moveTo(nullMagicCriclePos,0.0F, 0.0F);
+//        this.level().addFreshEntity(nullMagicCricle);
+//        UUID nullMagicCricleUUID = nullMagicCricle.getUUID();
         for (int i = -1 ; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
                 BlockPos setblockPos = new BlockPos(x+i,blockPosPlayer.getY(),z+j);
@@ -149,6 +157,7 @@ public class ReturnLockTargetEntity extends AbstractArrow {
                 blockEntity.setAttachEntityUUID(attachEntity.getUUID());
                 blockEntity.setBlockPosArray(middleBlockpos);
                 blockEntity.setCricleHowBig(getCricleHowBig());
+//                blockEntity.setNullMagicCricleUUID(nullMagicCricleUUID);
             }
         }
     }
