@@ -49,7 +49,7 @@ public class NullMagicCricleEntityModelRender extends EntityRenderer {
         // 构建顶点
         VertexConsumer buffer = pBuffer.getBuffer(this.model.renderType(this.getTextureLocation(pEntity)));
         // 调用模型的render方法进行渲染，这里的OverlayTexture下有很多类型，自己选用。
-        this.model.renderToBuffer(pPoseStack,buffer,15, OverlayTexture.NO_OVERLAY,1f,1f,1f,1f);
+        this.model.renderToBuffer(pPoseStack,buffer,12, OverlayTexture.NO_OVERLAY,1f,1f,1f,1f);
         pPoseStack.popPose();
     }
 }
