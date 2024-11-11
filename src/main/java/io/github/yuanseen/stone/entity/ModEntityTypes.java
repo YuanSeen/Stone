@@ -1,6 +1,7 @@
 package io.github.yuanseen.stone.entity;
 
 import io.github.yuanseen.stone.Stone;
+import io.github.yuanseen.stone.entity.magic.FireBallMagicEntity;
 import io.github.yuanseen.stone.entity.magic.NullMagicCricleEntity;
 import io.github.yuanseen.stone.entity.magic.ReturnLockTargetEntity;
 import net.minecraft.core.registries.Registries;
@@ -22,6 +23,8 @@ public class ModEntityTypes {
     );
     public static final Supplier<EntityType<NullMagicCricleEntity>> NULL_MAGIC_CRICLE_ENTITY = ENTITY_TYPES.register("null_magic_cricle_entity",() -> EntityType.Builder.of(NullMagicCricleEntity::new, MobCategory.MISC).sized(1.5F, 0.1F).clientTrackingRange(4).updateInterval(10).build("null_magic_cricle_entity")
     );
+
+    public static final Supplier<EntityType<FireBallMagicEntity>> FIRE_BALL_MAGIC_ENTITY = ENTITY_TYPES.register("fire_ball_magic_entity",()-> EntityType.Builder.of(FireBallMagicEntity::new,MobCategory.MISC).sized(3.0F,3.0F).clientTrackingRange(4).updateInterval(10).build("fire_ball_magic_entity"));
 
 
     public static void register(IEventBus eventBus){

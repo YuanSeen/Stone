@@ -3,12 +3,10 @@ package io.github.yuanseen.stone.event.client;
 
 import io.github.yuanseen.stone.client.model.entity.CapybaraModel;
 import io.github.yuanseen.stone.client.model.entity.StoneMobModel;
+import io.github.yuanseen.stone.client.model.entity.magic.FireBallMagicEntityModel;
 import io.github.yuanseen.stone.client.model.entity.magic.NullMagicCricleEntityModel;
 import io.github.yuanseen.stone.client.model.entity.magic.ReturnLockTargetEntityModel;
-import io.github.yuanseen.stone.client.render.entity.CapybaraRender;
-import io.github.yuanseen.stone.client.render.entity.NullMagicCricleEntityModelRender;
-import io.github.yuanseen.stone.client.render.entity.ReturnLockTargetEntityModelRender;
-import io.github.yuanseen.stone.client.render.entity.StoneMobRender;
+import io.github.yuanseen.stone.client.render.entity.*;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.neoforged.api.distmarker.Dist;
@@ -30,6 +28,7 @@ public class ClientEventHandler {
             EntityRenderers.register(ModEntityTypes.CAPYBARAP_POKEBALL_ENTITY.get(),ThrownItemRenderer::new);
             EntityRenderers.register(ModEntityTypes.RETURN_LOCK_TARGET_ENTITY.get(), ReturnLockTargetEntityModelRender::new);
             EntityRenderers.register(ModEntityTypes.NULL_MAGIC_CRICLE_ENTITY.get(), NullMagicCricleEntityModelRender::new);
+            EntityRenderers.register(ModEntityTypes.FIRE_BALL_MAGIC_ENTITY.get(), FireBallMagicEntityModelRender::new);
         });
     }
 
@@ -39,5 +38,6 @@ public class ClientEventHandler {
         evt.registerLayerDefinition(CapybaraModel.LAYER_LOCATION, CapybaraModel::createBodyLayer);
         evt.registerLayerDefinition(ReturnLockTargetEntityModel.LAYER_LOCATION,ReturnLockTargetEntityModel::createBodyLayer);
         evt.registerLayerDefinition(NullMagicCricleEntityModel.LAYER_LOCATION,NullMagicCricleEntityModel::createBodyLayer);
+        evt.registerLayerDefinition(FireBallMagicEntityModel.LAYER_LOCATION,FireBallMagicEntityModel::createBodyLayer);
     }
 }

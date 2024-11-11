@@ -214,7 +214,7 @@ public class ReturnLockTargetEntity extends AbstractArrow {
 //    public boolean shouldRender(double pX, double pY, double pZ) {
 //        return false;
 //    }
-public int getCricleHowBig() {
+    public int getCricleHowBig() {
     return cricleHowBig;
 }
 
