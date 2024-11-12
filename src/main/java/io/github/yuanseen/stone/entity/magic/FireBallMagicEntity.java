@@ -1,17 +1,59 @@
 package io.github.yuanseen.stone.entity.magic;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforgespi.language.ModFileScanData;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.AnnotatedType;
 import java.util.function.Supplier;
 
 public class FireBallMagicEntity extends Entity {
-    public FireBallMagicEntity(EntityType<?> pEntityType, Level pLevel) {
+    public final AnimationState getBiggerState = new AnimationState();
+    public final AnimationState rollTowardsTheTargetState = new AnimationState();
+    private static final int MAX_TIME = 1 * 20;
+
+    private int timer = 0;
+
+    public FireBallMagicEntity(EntityType<FireBallMagicEntity> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+    }
+
+
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (this.level().isClientSide()) {
+
+            if (getTimer() <= 40) {
+                this.rollTowardsTheTargetState.stop();
+                this.getBiggerState.startIfStopped(this.tickCount);
+                System.out.println(getTimer());
+            } else {
+                this.getBiggerState.stop();
+                this.rollTowardsTheTargetState.startIfStopped(this.tickCount);
+                System.out.println(getTimer()+"eee");
+
+            }
+//            this.rollTowardsTheTargetState.stop();
+//            this.getBiggerState.startIfStopped(this.tickCount);
+////            System.out.println(this.tickCount);
+//
+            timer++;
+        }
+
+
+
+
+//        this.setupAnimationStates();
     }
 
     /**
@@ -28,16 +70,16 @@ public class FireBallMagicEntity extends Entity {
      * @param pCompound
      */
     @Override
-    protected void readAdditionalSaveData(CompoundTag pCompound) {
-
+    public void readAdditionalSaveData(CompoundTag pCompound) {
+            setTimer(pCompound.getInt("time"));
     }
 
     /**
      * @param pCompound
      */
     @Override
-    protected void addAdditionalSaveData(CompoundTag pCompound) {
-
+    public void addAdditionalSaveData(CompoundTag pCompound) {
+            pCompound.putInt("time",getTimer());
     }
 
     /**
@@ -88,5 +130,13 @@ public class FireBallMagicEntity extends Entity {
     @Override
     public CompoundTag serializeNBT() {
         return super.serializeNBT();
+    }
+
+    public int getTimer() {
+        return timer;
+    }
+
+    public void setTimer(int timer) {
+        this.timer = timer;
     }
 }

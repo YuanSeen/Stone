@@ -12,7 +12,8 @@ public class FireBallMagicEntityAnimation {
     public static final AnimationDefinition getBigger = AnimationDefinition.Builder.withLength(1.0F)
             .addAnimation("bone", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                     new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR),
-                    new Keyframe(1.0F, KeyframeAnimations.degreeVec(180.0F, 180.0F, 180.0F), AnimationChannel.Interpolations.LINEAR)
+                    new Keyframe(0.5F, KeyframeAnimations.degreeVec(360.0F, 360.0F, 360.0F), AnimationChannel.Interpolations.LINEAR),
+                     new Keyframe(1.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR)
             ))
             .addAnimation("bone", new AnimationChannel(AnimationChannel.Targets.SCALE,
                     new Keyframe(0.0F, KeyframeAnimations.scaleVec(1.0F, 1.0F, 1.0F), AnimationChannel.Interpolations.LINEAR),
@@ -20,10 +21,12 @@ public class FireBallMagicEntityAnimation {
             ))
             .build();
 
-    public static final AnimationDefinition rollTowardsTheTarget = AnimationDefinition.Builder.withLength(1.0F).looping()
+    public static final AnimationDefinition rollTowardsTheTarget = AnimationDefinition.Builder.withLength(2.0F).looping()
             .addAnimation("bone", new AnimationChannel(AnimationChannel.Targets.ROTATION,
                     new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 0.0F), AnimationChannel.Interpolations.LINEAR),
-                    new Keyframe(1.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 180.0F), AnimationChannel.Interpolations.LINEAR)
+                    new Keyframe(1.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 180.0F), AnimationChannel.Interpolations.LINEAR),
+                    new Keyframe(1.5417F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 270.0F), AnimationChannel.Interpolations.LINEAR),
+                    new Keyframe(2.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 360.0F), AnimationChannel.Interpolations.LINEAR)
             ))
             .addAnimation("bone", new AnimationChannel(AnimationChannel.Targets.SCALE,
                     new Keyframe(0.0F, KeyframeAnimations.scaleVec(3.0F, 3.0F, 3.0F), AnimationChannel.Interpolations.LINEAR)
